@@ -1,0 +1,57 @@
+{% extends 'main/base_home.html' %}
+
+{% load static %}
+
+{% block main_list %}
+    {% for survey in surveys %}
+    <tr>
+        <td>
+          {{ survey.title }}
+        </td>
+        <td>
+          <div class="pages-table-img">
+{#            <picture><source srcset="./img/avatar/avatar-face-04.webp" type="image/webp"><img src="{% static './img/avatar/avatar-face-04.png' %}" alt="User Name"></picture>#}
+              {{ survey.pediatrist.name }}
+          </div>
+        </td>
+        <td><span class="badge-pending">
+            {% if survey.isValid %}
+                valid
+            {% else %}
+                not valid
+            {% endif %}
+        </span></td>
+        <td>{{ survey.surveyDate }}</td>
+        <td>
+          <span class="p-relative">
+            <ul class="users-item-dropdown dropdown">
+              <li><a href="##">Edit</a></li>
+              <li><a href="##">Quick edit</a></li>
+              <li><a href="##">Trash</a></li>
+            </ul>
+          </span>
+        </td>
+    </tr>
+    {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="top-cat-title">
+      <h3>Список врачей</h3>
+        <p>28 Categories, 1400 Posts</p>
+           </div>
+              <ul class="top-cat-list">
+                    {% for pediatrist in pediatrists %}
+                    <li>
+                      <a href="##">
+                        <div class="top-cat-list__title">
+                          {{ pediatrist.name }} <span>8.2k</span>
+                        </div>
+                        <div class="top-cat-list__subtitle">
+                          {{ pediatrist.workPlace }} <span class="purple">+472</span>
+                        </div>
+                      </a>
+                    </li>
+                  {% endfor %}
+      </ul>
+{% endblock %}

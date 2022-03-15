@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="users-table table-wrapper">
+              <table class="posts-table">
+                <thead>
+                  <tr class="users-table-info">
+                    <th>Ф.И.О</th>
+                    <th>Email</th>
+                    <th>Специальность</th>
+                    <th>Место работы</th>
+                    <th>Регистрация</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for pediatrist in pediatrists %}
+                      <tr>
+                        <td>
+                          {{ pediatrist.name }}
+                        </td>
+                        <td>
+                          {{ pediatrist.user.email }}
+                        </td>
+                        <td>
+                          Педиатр
+                        </td>
+                        <td>
+                            {{ pediatrist.workPlace }}
+                        </td>
+                        <td>
+                            {{ pediatrist.user.date_joined }}
+                        </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+{% endblock %}

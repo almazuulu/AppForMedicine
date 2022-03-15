@@ -1,0 +1,89 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block head %}
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static '/img/svg/logo.svg' %}" type="image/x-icon">
+  <!-- Custom styles -->
+
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styleofindex.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buttons.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-9">
+        <div class="users-table table-wrapper">
+            <table class="posts-table">
+                <thead>
+                <tr class="users-table-info">
+
+                    <th>Фамилия</th>
+                    <th>Дата рождения</th>
+                    <th>Пол</th>
+                    <th>Родитель 1</th>
+                    <th>Родитель 2</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for child in children %}
+                    <tr>
+                        <td>
+                        <a href="{% url 'form26_form' child.pk %}"> {{ child.name }}</a>
+                        </td>
+                        <td>
+                            {{ child.birthData }}
+                        </td>
+                        <td>
+                            {{ child.sex }}
+                        </td>
+                        <td>
+                            <div class="pages-table-img">
+                                {{ child.parent1.name }}
+                            </div>
+                        </td>
+                        </td>
+                        <td>
+                            <div class="pages-table-img">
+                                {{ child.parent2.name }}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        <div class="pagination">
+
+
+    <span class="step-links">
+    <ul class="pagination">
+        <li class="page-item">
+             <span class="current" style="padding-top: 10px;">
+                Page {{ children.number }} of {{ children.paginator.num_pages }}.
+            </span>
+        </li>
+
+        {% if children.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ children.previous_page_number }}">previous</a></li>
+        {% endif %}
+        {% if children.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ children.next_page_number }}">next</a></li>
+           <li class="page-item"> <a class="page-link" href="?page={{ children.paginator.num_pages }}">last &raquo;</a></li>
+        {% endif %}
+
+    </ul>
+    </span>
+    </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="right">
+
+
+</div>
+{% endblock %}
